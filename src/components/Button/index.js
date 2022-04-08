@@ -1,23 +1,19 @@
 import React from 'react';
-import propTypes from 'prop-types';
+import { Button } from 'react-bootstrap';
 
-function Button({ name, onClick, loading }) {
+function ComponentButton({
+  children,
+  action,
+  variant,
+  size,
+  loading,
+  disabeld,
+}) {
   return (
-    <button onClick={onClick} disabled={loading ? true : false}>
-      {loading ? 'Loading...' : name}
-    </button>
+    <Button onClick={action} variant={variant} disabeld={disabeld} size={size}>
+      {loading ? 'Loading...' : children}
+    </Button>
   );
 }
 
-Button.defaultProps = {
-  name: 'Button',
-  loading: false,
-};
-
-Button.propTypes = {
-  name: propTypes.string,
-  onClick: propTypes.func,
-  loading: propTypes.bool,
-};
-
-export default Button;
+export default ComponentButton;

@@ -1,7 +1,8 @@
 import React from 'react';
+import { Alert } from 'react-bootstrap';
 
-function Alert({ message, type }) {
-  return <div style={{ color: `${type === 'error' && 'red'}` }}>{message}</div>;
+function AlertMessage({ message, type }) {
+  return <Alert variant={type}>{message}</Alert>;
 }
 
-export default Alert;
+export default AlertMessage;
