@@ -3,7 +3,12 @@ import { Form } from 'react-bootstrap';
 import Button from '../../components/Button';
 import TextInputWithLabel from '../../components/TextInputWithLabel';
 
-export default function CategoriesForm({ handleSubmit, form, handleChange }) {
+export default function CategoriesForm({
+  handleSubmit,
+  form,
+  handleChange,
+  isLoading,
+}) {
   return (
     <Form>
       <TextInputWithLabel
@@ -14,16 +19,8 @@ export default function CategoriesForm({ handleSubmit, form, handleChange }) {
         type='text'
         onChange={handleChange}
       />
-      <TextInputWithLabel
-        placeholder={'Masukan avatar'}
-        label={'Nama avatar'}
-        name='avatar'
-        value={form.avatar}
-        type='file'
-        onChange={handleChange}
-      />
-      <Button variant='primary' action={handleSubmit}>
-        Submit
+      <Button variant='primary' action={handleSubmit} loading={isLoading}>
+        Simpan
       </Button>
     </Form>
   );

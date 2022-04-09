@@ -1,4 +1,6 @@
 import React from 'react';
+import Button from '../Button';
+import { useNavigate } from 'react-router-dom';
 
 function TbodyWithAction({
   data,
@@ -8,6 +10,7 @@ function TbodyWithAction({
   customAction,
   actionNotDisplay,
 }) {
+  const navigate = useNavigate();
   return (
     <tbody>
       {data.length ? (
@@ -20,20 +23,25 @@ function TbodyWithAction({
               )}
               {!actionNotDisplay && (
                 <td>
-                  {/* {editUrl && (
-                    <Link
-                      className='btn btn-warning'
-                      to={`${editUrl}/${data.id}`}
+                  {editUrl && (
+                    <Button
+                      variant='success'
+                      size={'sm'}
+                      action={() => navigate(`${editUrl}/${data._id}`)}
                     >
-                      {' '}
-                      <i className='fas fa-edit'></i>{' '}
-                    </Link>
-                  )} */}
-                  {/* {deleteAction && (
-                    <button className='btn btn-danger' onClick={null}>
-                      <i className='fas fa-trash'></i>
-                    </button>
-                  )} */}
+                      Edit
+                    </Button>
+                  )}
+                  {deleteAction && (
+                    <Button
+                      className={'mx-2'}
+                      variant='danger'
+                      size={'sm'}
+                      action={() => deleteAction(data._id)}
+                    >
+                      Hapus
+                    </Button>
+                  )}
                 </td>
               )}
             </tr>
