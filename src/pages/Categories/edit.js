@@ -7,7 +7,6 @@ import Form from './form';
 function CategoryEdit() {
   const [form, setForm] = useState({
     name: 'elfin',
-    avatar: 10,
   });
 
   const handleChange = (e) => {
@@ -24,7 +23,7 @@ function CategoryEdit() {
         urlSecound={'/categories'}
         textThird='Create'
       />
-      <Alert type='danger' message={'Name kategori tidak boleh kosong'} />
+      {/* <Alert type='danger' message={'Name kategori tidak boleh kosong'} /> */}
       <Form
         form={form}
         handleChange={handleChange}

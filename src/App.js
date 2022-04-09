@@ -6,18 +6,22 @@ import PageSignin from './pages/Signin';
 import Categories from './pages/Categories';
 import CategoriesCreate from './pages/Categories/create';
 import CategoriesEdit from './pages/Categories/edit';
+import { listen } from './redux/listener';
 
 function App() {
+  React.useEffect(() => {
+    listen();
+  }, []);
   return (
     <BrowserRouter>
       <Navbar />
       <br />
       <Routes>
         <Route path='/login' element={<PageSignin />} />
-        <Route path='categories' element={<Categories />} />
-        <Route path='categories/create' element={<CategoriesCreate />} />
+        <Route path='/categories' element={<Categories />} />
+        <Route path='/categories/create' element={<CategoriesCreate />} />
         <Route
-          path='categories/edit/:categoryId'
+          path='/categories/edit/:categoryId'
           element={<CategoriesEdit />}
         />
         <Route path='speakers' element={<Speakers />} />
