@@ -7,6 +7,9 @@ import Table from '../../components/TableWithAction';
 import { useSelector, useDispatch } from 'react-redux';
 import { fetchCategories } from '../../redux/categories/actions';
 import AlertMessage from '../../components/Alert';
+import Swal from 'sweetalert2';
+import { deleteData } from '../../utils/fetchData';
+import { setNotif } from '../../redux/notif/actions';
 
 function Categories() {
   const navigate = useNavigate();
@@ -26,7 +29,38 @@ function Categories() {
   }, []);
 
   const handleDelete = (id) => {
-    console.log(id);
+    Swal.fire({
+      title: 'Apa kamu yakin?',
+      text: 'Anda tidak akan dapat mengembalikan ini!',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Iya, Hapus',
+      cancelButtonText: 'Batal',
+    }).then(async (result) => {
+      if (result.isConfirmed) {
+        const res = await deleteData(`api/v1/categories/${id}`);
+
+        // Swal.fire({
+        //   position: 'top-end',
+        //   icon: 'success',
+        //   title: `Berhasil hapus kategori ${res.data.data.name}`,
+        //   showConfirmButton: false,
+        //   timer: 1500,
+        // });
+
+        dispatch(
+          setNotif(
+            true,
+            'success',
+            `berhasil hapus kategori ${res.data.data.name}`
+          )
+        );
+
+        dispatch(fetchCategories());
+      }
+    });
   };
 
   return (
@@ -37,6 +71,7 @@ function Categories() {
         <AlertMessage type={notif.typeNotif} message={notif.message} />
       )}
       <Table
+        status={categories.status}
         thead={['Nama', 'Aksi']}
         data={categories.data}
         tbody={['name']}

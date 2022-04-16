@@ -30,18 +30,15 @@ export const errorFetchingCategories = () => {
 };
 
 export const fetchCategories = () => {
-  return async (dispatch, getState) => {
+  return async (dispatch) => {
     dispatch(startFetchingCategories());
 
     try {
-      let keyword = getState.categories.keyword;
-      const params = { keyword };
-
       setTimeout(() => {
         dispatch(clearNotif());
       }, 5000);
 
-      let res = await debouncedFetchCategories('api/v1/categories', params);
+      let res = await debouncedFetchCategories('api/v1/categories');
 
       dispatch(
         successFetchingCategories({

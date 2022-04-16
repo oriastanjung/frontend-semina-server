@@ -8,6 +8,7 @@ export default function CategoriesForm({
   form,
   handleChange,
   isLoading,
+  edit,
 }) {
   return (
     <Form>
@@ -20,7 +21,7 @@ export default function CategoriesForm({
         onChange={handleChange}
       />
       <Button variant='primary' action={handleSubmit} loading={isLoading}>
-        Simpan
+        {edit ? 'Ubah' : 'Simpan'}
       </Button>
     </Form>
   );

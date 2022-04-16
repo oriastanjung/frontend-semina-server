@@ -1,0 +1,109 @@
+import {
+  START_FETCHING_LISTS_CATEGORIES,
+  SUCCESS_FETCHING_LISTS_CATEGORIES,
+  ERROR_FETCHING_LISTS_CATEGORIES,
+  START_FETCHING_LISTS_SPEAKERS,
+  ERROR_FETCHING_LISTS_SPEAKERS,
+  SUCCESS_FETCHING_LISTS_SPEAKERS,
+} from './constants';
+
+import { getData } from '../../utils/fetchData';
+import debounce from 'debounce-promise';
+
+let debouncedFetchListsCategories = debounce(getData, 1000);
+let debouncedFetchListsSpeakers = debounce(getData, 1000);
+
+export const startFetchingListsCategories = () => {
+  return {
+    type: START_FETCHING_LISTS_CATEGORIES,
+  };
+};
+
+export const successFetchingListCategories = ({ categories }) => {
+  return {
+    type: SUCCESS_FETCHING_LISTS_CATEGORIES,
+    categories,
+  };
+};
+
+export const errorFetchingListCategories = () => {
+  return {
+    type: ERROR_FETCHING_LISTS_CATEGORIES,
+  };
+};
+
+export const fetchListCategories = () => {
+  return async (dispatch) => {
+    dispatch(startFetchingListsCategories());
+
+    try {
+      let res = await debouncedFetchListsCategories('api/v1/categories');
+
+      let _temp = [];
+
+      res.data.data.forEach((res) => {
+        _temp.push({
+          value: res._id,
+          label: res.name,
+          target: { value: res._id, name: 'category' },
+        });
+      });
+
+      dispatch(
+        successFetchingListCategories({
+          categories: _temp,
+        })
+      );
+    } catch (error) {
+      dispatch(errorFetchingListCategories());
+    }
+  };
+};
+
+// redux list speakers
+export const startFetchingListsSpeakers = () => {
+  return {
+    type: START_FETCHING_LISTS_SPEAKERS,
+  };
+};
+
+export const successFetchingListSpeakers = ({ speakers }) => {
+  return {
+    type: SUCCESS_FETCHING_LISTS_SPEAKERS,
+    speakers,
+  };
+};
+
+export const errorFetchingListSpeakers = () => {
+  return {
+    type: ERROR_FETCHING_LISTS_SPEAKERS,
+  };
+};
+
+export const fetchListSpeakers = () => {
+  return async (dispatch) => {
+    dispatch(startFetchingListsSpeakers());
+
+    try {
+      let res = await debouncedFetchListsSpeakers('api/v1/speakers');
+
+      let _temp = [];
+
+      res.data.data.forEach((res) => {
+        _temp.push({
+          value: res._id,
+          label: res.name,
+          target: { value: res._id, name: 'speaker' },
+        });
+      });
+
+      dispatch(
+        successFetchingListSpeakers({
+          speakers: _temp,
+        })
+      );
+    } catch (error) {
+      dispatch(errorFetchingListSpeakers());
+    }
+  };
+};
