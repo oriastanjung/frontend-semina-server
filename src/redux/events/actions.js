@@ -53,7 +53,7 @@ export const fetchEvents = () => {
         res.categoryName = res?.category?.name ?? '';
         res.speakerName = res?.speaker?.name ?? '-';
       });
-
+      console.log(res);
       dispatch(
         successFetchingEvents({
           events: res.data.data,

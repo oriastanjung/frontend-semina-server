@@ -124,6 +124,7 @@ function EventPage() {
           'Harga',
           'Tanggal',
           'Tempat',
+          'Stok',
           'Kategori',
           'Pembicara',
           'Aksi',
@@ -136,6 +137,8 @@ function EventPage() {
           'venueName',
           'categoryName',
           'speakerName',
+          'stock',
+          
         ]}
         editUrl={`/events/edit`}
         deleteAction={(id) => handleDelete(id)}
