@@ -70,7 +70,7 @@ function SpeakersPage() {
       <BreadCrumb textSecound={'speakers'} />
       <SearchInput
         name='keyword'
-        value={speakers.keyword}
+        query={speakers.keyword}
         handleChange={(e) => dispatch(setKeyword(e.target.value))}
       />
       {notif.status && (
@@ -83,6 +83,7 @@ function SpeakersPage() {
         tbody={['name', 'avatar', 'role']}
         editUrl={`/speakers/edit`}
         deleteAction={(id) => handleDelete(id)}
+        withoutPagination
       />
     </Container>
   );

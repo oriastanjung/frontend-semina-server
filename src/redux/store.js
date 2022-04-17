@@ -7,6 +7,7 @@ import notifReducer from './notif/reducer';
 import speakersReducer from './speakers/reducers';
 import eventsReducer from './events/reducers';
 import listsReducer from './lists/reducer';
+import transactionsReducer from './transactions/reducers';
 
 const composerEnhancer = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
@@ -17,6 +18,7 @@ const rootReducers = combineReducers({
   speakers: speakersReducer,
   events: eventsReducer,
   lists: listsReducer,
+  transactions: transactionsReducer,
 });
 const store = createStore(
   rootReducers,

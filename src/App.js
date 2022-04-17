@@ -9,6 +9,10 @@ import Categories from './pages/Categories';
 import CategoriesCreate from './pages/Categories/create';
 import CategoriesEdit from './pages/Categories/edit';
 import Events from './pages/Events';
+import EventsCreate from './pages/Events/create';
+import EventsEdit from './pages/Events/edit';
+import Transactions from './pages/Transactions';
+import Logout from './pages/Logout';
 import { listen } from './redux/listener';
 
 function App() {
@@ -31,6 +35,10 @@ function App() {
         <Route path='speakers/create' element={<SpeakersCreate />} />
         <Route path='speakers/edit/:speakerId' element={<SpeakersEdit />} />
         <Route path='events' element={<Events />} />
+        <Route path='events/create' element={<EventsCreate />} />
+        <Route path='events/edit/:eventId' element={<EventsEdit />} />
+        <Route path='transactions' element={<Transactions />} />
+        <Route path='logout' element={<Logout />} />
       </Routes>
     </BrowserRouter>
   );

@@ -1,11 +1,19 @@
 import React from 'react';
 import { Container, Nav, Navbar } from 'react-bootstrap';
+import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import NavLink from '../NavLink';
+import { userLogout } from '../../redux/auth/actions';
 
 function ComponentNavbar() {
+  const dispatch = useDispatch();
   const navigate = useNavigate();
-  const isLogin = false;
+  let user = useSelector((state) => state.auth);
+
+  const handleLogout = () => {
+    dispatch(userLogout());
+    navigate('/logout');
+  };
   return (
     <Navbar bg='light' variant='light'>
       <Container>
@@ -15,16 +23,20 @@ function ComponentNavbar() {
           <NavLink action={() => navigate('/speakers')}>Speakers</NavLink>
           <NavLink action={() => navigate('/events')}>Events</NavLink>
           <NavLink action={() => navigate('/participant')}>Participant</NavLink>
-          <NavLink action={() => navigate('/Transactions')}>
+          <NavLink action={() => navigate('/transactions')}>
             Transactions
           </NavLink>
         </Nav>
         <Nav>
-          {!isLogin && (
+          {!user.token && (
             <NavLink action={() => navigate('/login')}>Login</NavLink>
           )}
         </Nav>
-        <Nav>{isLogin && <NavLink href='#deets'>Username</NavLink>}</Nav>
+        <Nav>
+          {user.token && (
+            <NavLink action={() => handleLogout()}>Logout</NavLink>
+          )}
+        </Nav>
       </Container>
     </Navbar>
   );

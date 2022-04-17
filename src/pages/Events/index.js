@@ -88,7 +88,7 @@ function EventPage() {
         <Col>
           <SearchInput
             name='keyword'
-            value={events.keyword}
+            query={events.keyword}
             handleChange={(e) => dispatch(setKeyword(e.target.value))}
           />
         </Col>
@@ -139,6 +139,7 @@ function EventPage() {
         ]}
         editUrl={`/events/edit`}
         deleteAction={(id) => handleDelete(id)}
+        withoutPagination
       />
     </Container>
   );

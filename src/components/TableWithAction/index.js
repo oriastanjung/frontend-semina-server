@@ -1,5 +1,6 @@
 import React from 'react';
 import { Table } from 'react-bootstrap';
+import Pagination from '../Pagination';
 import Tbody from '../TbodyWithAction';
 import Thead from '../Thead';
 
@@ -17,18 +18,25 @@ function TableWithAction({
   status,
 }) {
   return (
-    <Table striped bordered hover>
-      <Thead text={thead} />
-      <Tbody
-        status={status}
-        data={data}
-        display={tbody}
-        editUrl={editUrl}
-        deleteAction={deleteAction}
-        actionNotDisplay={actionNotDisplay}
-        customAction={customAction}
-      />
-    </Table>
+    <>
+      <Table striped bordered hover>
+        <Thead text={thead} />
+        <Tbody
+          status={status}
+          data={data}
+          display={tbody}
+          editUrl={editUrl}
+          deleteAction={deleteAction}
+          actionNotDisplay={actionNotDisplay}
+          customAction={customAction}
+        />
+      </Table>
+      {!withoutPagination && data.length ? (
+        <Pagination pages={pages} handlePageClick={handlePageClick} />
+      ) : (
+        ''
+      )}
+    </>
   );
 }
 

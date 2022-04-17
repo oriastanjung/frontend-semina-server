@@ -5,6 +5,9 @@ import {
   START_FETCHING_LISTS_SPEAKERS,
   ERROR_FETCHING_LISTS_SPEAKERS,
   SUCCESS_FETCHING_LISTS_SPEAKERS,
+  START_FETCHING_LISTS_EVENTS,
+  ERROR_FETCHING_LISTS_EVENTS,
+  SUCCESS_FETCHING_LISTS_EVENTS,
 } from './constants';
 
 import { getData } from '../../utils/fetchData';
@@ -12,6 +15,7 @@ import debounce from 'debounce-promise';
 
 let debouncedFetchListsCategories = debounce(getData, 1000);
 let debouncedFetchListsSpeakers = debounce(getData, 1000);
+let debouncedFetchListsEvents = debounce(getData, 1000);
 
 export const startFetchingListsCategories = () => {
   return {
@@ -104,6 +108,55 @@ export const fetchListSpeakers = () => {
       );
     } catch (error) {
       dispatch(errorFetchingListSpeakers());
+    }
+  };
+};
+
+// event
+
+export const startFetchingListsEvents = () => {
+  return {
+    type: START_FETCHING_LISTS_EVENTS,
+  };
+};
+
+export const successFetchingListEvents = ({ events }) => {
+  return {
+    type: SUCCESS_FETCHING_LISTS_EVENTS,
+    events,
+  };
+};
+
+export const errorFetchingListEvents = () => {
+  return {
+    type: ERROR_FETCHING_LISTS_EVENTS,
+  };
+};
+
+export const fetchListEvents = () => {
+  return async (dispatch) => {
+    dispatch(startFetchingListsEvents());
+
+    try {
+      let res = await debouncedFetchListsEvents('api/v1/events');
+
+      let _temp = [];
+
+      res.data.data.forEach((res) => {
+        _temp.push({
+          value: res._id,
+          label: res.title,
+          target: { value: res._id, name: 'event' },
+        });
+      });
+
+      dispatch(
+        successFetchingListEvents({
+          events: _temp,
+        })
+      );
+    } catch (error) {
+      dispatch(errorFetchingListEvents());
     }
   };
 };

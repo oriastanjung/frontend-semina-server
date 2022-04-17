@@ -77,6 +77,7 @@ function Categories() {
         tbody={['name']}
         editUrl={`/categories/edit`}
         deleteAction={(id) => handleDelete(id)}
+        withoutPagination
       />
     </Container>
   );
