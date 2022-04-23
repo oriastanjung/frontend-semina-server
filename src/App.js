@@ -14,6 +14,9 @@ import EventsEdit from './pages/Events/edit';
 import Transactions from './pages/Transactions';
 import Logout from './pages/Logout';
 import { listen } from './redux/listener';
+import PaymentsPage from './pages/Payments';
+import PaymentsCreate from './pages/Payments/create';
+import PaymentsEdit from './pages/Payments/edit';
 
 function App() {
   React.useEffect(() => {
@@ -39,6 +42,9 @@ function App() {
         <Route path='events/edit/:eventId' element={<EventsEdit />} />
         <Route path='transactions' element={<Transactions />} />
         <Route path='logout' element={<Logout />} />
+        <Route path='payments' element={<PaymentsPage />} />
+        <Route path='payments/create' element={<PaymentsCreate />} />
+        <Route path='payments/edit/:paymentsId' element={<PaymentsEdit />} />
       </Routes>
     </BrowserRouter>
   );

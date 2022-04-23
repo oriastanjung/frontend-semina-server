@@ -11,6 +11,7 @@ function TbodyWithAction({
   editUrl,
   deleteAction,
   customAction,
+  toggleStatusBank,
   actionNotDisplay,
   status,
 }) {
@@ -42,7 +43,17 @@ function TbodyWithAction({
                         />
                       ) : key === 'date' ? (
                         moment(data[key]).format('DD-MM-YYYY, h:mm:ss a')
-                      ) : (
+                      ) : key === 'imageUrl' ? (
+                        <Image
+                          height={40}
+                          width={40}
+                          roundedCircle
+                          src={`${config.api_image}/${data[key]}`}
+                        />
+                      ) : key === 'status' ? (
+                        <p>{data[key] === true ? "true" : "false" }</p>
+                      ) 
+                      : (
                         data[key]
                       )}
                     </td>
@@ -67,6 +78,16 @@ function TbodyWithAction({
                       action={() => deleteAction(data._id)}
                     >
                       Hapus
+                    </Button>
+                  )}
+                  {toggleStatusBank && (
+                    <Button
+                      className={'mx-2'}
+                      variant='warning'
+                      size={'sm'}
+                      action={() => toggleStatusBank(data._id)}
+                    >
+                      Ubah Status
                     </Button>
                   )}
                 </td>

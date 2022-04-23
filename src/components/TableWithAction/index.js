@@ -13,6 +13,7 @@ function TableWithAction({
   tbody,
   editUrl,
   deleteAction,
+  toggleStatusBank,
   pages,
   customAction,
   status,
@@ -28,6 +29,7 @@ function TableWithAction({
           editUrl={editUrl}
           deleteAction={deleteAction}
           actionNotDisplay={actionNotDisplay}
+          toggleStatusBank = {toggleStatusBank}
           customAction={customAction}
         />
       </Table>

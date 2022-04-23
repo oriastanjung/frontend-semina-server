@@ -26,6 +26,9 @@ function ComponentNavbar() {
           <NavLink action={() => navigate('/transactions')}>
             Transactions
           </NavLink>
+          <NavLink action={() => navigate('/payments')}>
+            Payments
+          </NavLink>
         </Nav>
         <Nav>
           {!user.token && (
